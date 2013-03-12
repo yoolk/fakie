@@ -15,6 +15,11 @@ module Fakie
       assert phone_number.is_valid?
     end
 
+    def test_to_s
+      phone_number = Fakie.parse('+14155550123')
+      assert_equal phone_number.e164, phone_number.to_s
+    end
+
     def test_parse_with_default_country
       phone_number = Fakie.parse('(415) 555-0123', default_country: 'US')
       assert_equal 1, phone_number.country_code

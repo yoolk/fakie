@@ -36,6 +36,10 @@ module Fakie
       @type = hash['type']
     end
 
+    def to_s
+      self.e164
+    end
+
     def is_possible?
       @is_possible
     end
