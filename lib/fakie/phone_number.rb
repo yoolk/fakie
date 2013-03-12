@@ -1,23 +1,20 @@
 module Fakie
   class PhoneNumber
-    include JavaScript
-
     class << self
-      include JavaScript
-
       # Parse a phone number
       # @param phone_number [String] phone number to parse
       # @option options default_country [String] ISO 3166-1 two-letter country code
       # @return [PhoneNumber] phone number object
       def parse(phone_number, options = {})
         region_code = options[:default_country]
-        self.new(js_call('Fakie.parse', phone_number, region_code))
+        self.new(JavaScript.call('Fakie.parse', phone_number, region_code))
       end
     end
 
     attr_reader :e164
     attr_reader :country_code
     attr_reader :national_number
+    attr_reader :area_code
     attr_reader :raw_input
     attr_reader :country_code_source
     attr_reader :preferred_domestic_carrier_code
@@ -29,6 +26,7 @@ module Fakie
       @e164 = hash['e164']
       @country_code = hash['country_code']
       @national_number = hash['national_number']
+      @area_code = hash['area_code']
       @raw_input = hash['raw_input'].to_s
       @country_code_source = hash['country_code_source']
       @preferred_domestic_carrier_code = hash['preferred_domestic_carrier_code']
@@ -48,12 +46,12 @@ module Fakie
 
     def international_format(region = self.region_code)
       raise InvalidPhoneNumber unless self.is_valid?
-      @international_format ||= js_call('Fakie.formatInternational', region, self.e164)
+      @international_format ||= JavaScript.call('Fakie.formatInternational', region, self.e164)
     end
 
     def local_format(region = self.region_code)
       raise InvalidPhoneNumber unless self.is_valid?
-      @local_format ||= js_call('Fakie.formatLocal', region, self.e164)
+      @local_format ||= JavaScript.call('Fakie.formatLocal', region, self.e164)
     end
 
     def country_name

@@ -6,9 +6,11 @@ module Fakie
       phone_number = Fakie.parse('+1 415 555 0123')
       assert_equal 1, phone_number.country_code
       assert_equal 4155550123, phone_number.national_number
+      assert_equal '415', phone_number.area_code
       assert_equal '+1 415 555 0123', phone_number.raw_input
       assert_equal '+14155550123', phone_number.e164
       assert_equal 'US', phone_number.region_code
+      assert_equal 'United States', phone_number.country_name
       assert phone_number.is_possible?
       assert phone_number.is_valid?
     end

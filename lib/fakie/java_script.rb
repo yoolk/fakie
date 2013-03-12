@@ -4,7 +4,7 @@ module Fakie
 
     # ExecJS Context
     # @return [ExecJS::ExternalRuntime::Context] context for executing JavaScript against libphonenumber and Fakie
-    def js_context
+    def context
       @@_js_context ||= begin
         require 'execjs'
         js_dir = File.join(File.expand_path(File.dirname(__FILE__)), 'js')
@@ -17,14 +17,14 @@ module Fakie
     # Call a function against the context
     # @param function [String] function name
     # @param args [* String] list of arguments to send to the function
-    def js_call(function, *args)
-      js_context.call(function, *args)
+    def call(function, *args)
+      context.call(function, *args)
     end
 
     # Call a function against the context
     # @param function [String] JavaScript code to evaluate
-    def js_eval(script)
-      js_context.eval(script)
+    def eval(script)
+      context.eval(script)
     end
   end
 end
