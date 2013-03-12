@@ -46,22 +46,28 @@ module Fakie
 
     def e164_format
       raise InvalidPhoneNumber unless self.is_valid?
-      @e164_format ||= js_call('Fakie.formatE164', self.region_code, self.raw_input)
+      @e164_format ||= js_call('Fakie.formatE164', self.region_code, formatter_input)
     end
 
     def international_format
       raise InvalidPhoneNumber unless self.is_valid?
-      @international_format ||= js_call('Fakie.formatInternational', self.region_code, self.raw_input)
+      @international_format ||= js_call('Fakie.formatInternational', self.region_code, formatter_input)
     end
 
     def local_format
       raise InvalidPhoneNumber unless self.is_valid?
-      @local_format ||= js_call('Fakie.formatLocal', self.region_code, self.raw_input)
+      @local_format ||= js_call('Fakie.formatLocal', self.region_code, formatter_input)
     end
 
     def country_name
       return nil unless self.region_code
-      @country_name ||= js_call('Fakie.countryCodeToName', self.region_code)
+      Fakie.country_name_for_region_code(self.region_code)
+    end
+
+  private
+
+    def formatter_input
+      input = "+#{self.country_code}#{self.national_number}"
     end
   end
 end

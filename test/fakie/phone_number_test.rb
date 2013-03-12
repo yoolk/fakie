@@ -35,6 +35,9 @@ module Fakie
     def test_international_format
       phone_number = Fakie.parse('+14155550123')
       assert_equal '+1 415-555-0123', phone_number.international_format
+
+      phone_number = Fakie.parse('415-555-0123', default_country: 'US')
+      assert_equal '+1 415-555-0123', phone_number.international_format
     end
   end
 end
