@@ -4,18 +4,24 @@ require 'fakie/java_script'
 require 'fakie/phone_number'
 
 module Fakie
-  module_function
+  def self.default_options
+    @default_options || {}
+  end
+
+  def self.default_options=(options)
+    @default_options = options
+  end
 
   # Parse a phone number
   # @param phone_number [String] phone number to parse
   # @option options default_country [String] ISO 3166-1 two-letter country code
   # @return [PhoneNumber] phone number object
-  def parse(phone_number, options = {})
+  def self.parse(phone_number, options = {})
     PhoneNumber.parse(phone_number, options)
   end
 
-  def country_name_for_region_code(region_code)
-    @@_country_name_map ||= {
+  def self.country_name_for_region_code(region_code)
+    @_country_name_map ||= {
       'AF' => "Afghanistan",
       'AL' => "Albania",
       'DZ' => "Algeria",
@@ -257,6 +263,6 @@ module Fakie
       'ZW' => "Zimbabwe"
     }
 
-    @@_country_name_map[region_code.upcase]
+    @_country_name_map[region_code.upcase]
   end
 end

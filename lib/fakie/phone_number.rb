@@ -6,8 +6,11 @@ module Fakie
       # @option options default_country [String] ISO 3166-1 two-letter country code
       # @return [PhoneNumber] phone number object
       def parse(phone_number, options = {})
+        options = Fakie.default_options.merge(options)
         region_code = options[:default_country]
         self.new(JavaScript.call('Fakie.parse', phone_number, region_code))
+      rescue ExecJS::ProgramError => e
+        self.new({'raw_input' => phone_number, 'is_valid' => false})
       end
     end
 
@@ -51,11 +54,15 @@ module Fakie
     def international_format(region = self.region_code)
       raise InvalidPhoneNumber, self.raw_input unless self.is_valid?
       @international_format ||= JavaScript.call('Fakie.formatInternational', region, self.e164)
+    rescue ExecJS::ProgramError => e
+      self.e164
     end
 
     def local_format(region = self.region_code)
       raise InvalidPhoneNumber, self.raw_input unless self.is_valid?
       @local_format ||= JavaScript.call('Fakie.formatLocal', region, self.e164)
+    rescue ExecJS::ProgramError => e
+      self.e164
     end
 
     def country_name
