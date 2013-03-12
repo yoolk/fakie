@@ -7,8 +7,8 @@ module Fakie
     def js_context
       @@_js_context ||= begin
         require 'execjs'
-        source = File.open('lib/fakie/js/libphonenumber.js').read
-        source += File.open('lib/fakie/js/fakie.js').read
+        source = File.open(File.join(__FILE__, '../js/libphonenumber.js')).read
+        source += File.open(File.join(__FILE__, '../js/fakie.js')).read
         ExecJS.compile(source)
       end
     end
