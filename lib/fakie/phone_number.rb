@@ -45,12 +45,12 @@ module Fakie
     end
 
     def international_format(region = self.region_code)
-      raise InvalidPhoneNumber unless self.is_valid?
+      raise InvalidPhoneNumber, self.raw_input unless self.is_valid?
       @international_format ||= JavaScript.call('Fakie.formatInternational', region, self.e164)
     end
 
     def local_format(region = self.region_code)
-      raise InvalidPhoneNumber unless self.is_valid?
+      raise InvalidPhoneNumber, self.raw_input unless self.is_valid?
       @local_format ||= JavaScript.call('Fakie.formatLocal', region, self.e164)
     end
 
