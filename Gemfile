@@ -6,7 +6,8 @@ gem 'rake', :group => [:development, :test]
 
 # Development dependencies
 group :development do
-  gem 'nokogiri'
+  gem 'yard'
+  gem 'redcarpet', :platform => 'ruby'
 end
 
 # Testing dependencies

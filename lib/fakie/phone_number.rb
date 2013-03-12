@@ -27,7 +27,7 @@ module Fakie
     def initialize(hash)
       @country_code = hash['country_code']
       @national_number = hash['national_number']
-      @raw_input = hash['raw_input']
+      @raw_input = hash['raw_input'].to_s
       @country_code_source = hash['country_code_source']
       @preferred_domestic_carrier_code = hash['preferred_domestic_carrier_code']
       @is_possible = hash['is_possible']
@@ -51,7 +51,7 @@ module Fakie
 
     def international_format
       raise InvalidPhoneNumber unless self.is_valid?
-      @international_format ||= js_call('Fakie.formatInternation', self.region_code, self.raw_input)
+      @international_format ||= js_call('Fakie.formatInternational', self.region_code, self.raw_input)
     end
 
     def local_format
