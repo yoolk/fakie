@@ -35,6 +35,14 @@ Or install it yourself as:
 => "United States"
 ```
 
+## Supported Ruby Versions
+
+Fakie is tested under 1.8.7, 1.9.2, 1.9.3, 2.0.0, JRuby 1.7.2 (1.9 mode), and Rubinius 2.0.0 (1.9 mode).
+
+[![Build Status](https://travis-ci.org/seesawco/fakie.png?branch=master)](https://travis-ci.org/seesawco/fakie)
+
 ## Contributing
 
 See the [contributing guide](Contributing.markdown).
+
+To update libphonenumber, simply run `rake import`. It will download and build the neccessary files. You'll need closure-compiler installed to do it.
