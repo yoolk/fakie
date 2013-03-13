@@ -26,5 +26,10 @@ module Fakie
       phone_number = PhoneNumber.parse('+34693600000')
       assert_equal 'ES', phone_number.region_code
     end
+
+    def test_by
+      phone_number = PhoneNumber.parse('+375259366000')
+      assert_equal 'BY', phone_number.region_code
+    end
   end
 end
