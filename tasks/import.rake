@@ -1,8 +1,11 @@
+require 'fileutils'
 SRCPATH = 'tmp/libphonenumber/javascript/i18n/phonenumbers'
 CLOSUREPATH = 'tmp/closure-library/closure/goog'
 
 desc 'Import and build the latest version of libphonenumber'
 task :import do
+  FileUtils.rm_rf "tmp"
+
   unless File.exists?(SRCPATH)
     puts 'Downloading libphonenumber...'
     `svn export http://libphonenumber.googlecode.com/svn/trunk tmp/libphonenumber`
