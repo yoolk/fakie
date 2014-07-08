@@ -13,7 +13,9 @@ task :import do
 
   unless File.exists?(CLOSUREPATH)
     puts 'Downloading closure-library...'
-    `svn export http://closure-library.googlecode.com/svn/trunk tmp/closure-library`
+    `wget https://closure-library.googlecode.com/files/closure-library-20130212-95c19e7f0f5f.zip -O tmp/closure-library-20130212-95c19e7f0f5f.zip`
+    `mkdir -p tmp/closure-library`
+    `unzip tmp/closure-library-20130212-95c19e7f0f5f.zip -d tmp/closure-library`
   end
 
   unless `which closure-compiler`.chomp.length > 0
