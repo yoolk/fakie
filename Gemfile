@@ -13,6 +13,5 @@ end
 # Testing dependencies
 group :test do
   gem 'minitest'
-  gem 'minitest-wscolor' if RUBY_VERSION >= '1.9.3'
   gem 'simplecov', :require => false
 end
